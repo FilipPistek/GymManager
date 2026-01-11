@@ -30,10 +30,10 @@ Aby aplikace fungovala, je nutné provést následující kroky:
     * Otevřete **MS SQL**.
     * Vytvořte novou databázi (např. `GymDB`).
     * V kořenu projektu najděte **`database_setup.sql`**.
-    * Spusťte sql ve vaší vytvořené databázi
+    * Spusťte sql ve vaší vytvořené databázi.
     * Vytvoří se tabulky `Clients`, `Trainers`, `Lessons`, `Bookings`, `Logs` a `Views`.
 
 3.  **Spuštění:**
-    * Upravte si v App.config sekci `<connectionStrings>` upravte hodnoty, které jsou napsaná VELKÝM PÍSMEM na vlastní.
+    * Upravte si v App.config sekci `<connectionStrings>` upravte hodnoty, která jsou napsaná VELKÝM PÍSMEM na vlastní hodnoty.
     * Spusťte aplikaci `GymManager.exe`.
     * Pro funkci 9 a 10 můžete použít `.csv` soubory ze složky `TestingData/`
