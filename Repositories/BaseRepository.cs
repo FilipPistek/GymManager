@@ -9,7 +9,7 @@ namespace GymManager.Repositories
 
         public BaseRepository()
         {
-            _connectionString = ConfigurationManager.ConnectionStrings["pistek"].ConnectionString; // Zde zadej jméno databáze
+            _connectionString = ConfigurationManager.ConnectionStrings["NAZEV_DATABAZE"].ConnectionString; // Zde zadej jméno databáze
         }
 
         protected SqlConnection GetConnection()
