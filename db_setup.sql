@@ -17,7 +17,7 @@ CREATE TABLE Trainers (
 
 CREATE TABLE Lessons (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    name NVARCHAR(20) NOT NULL,
+    name NVARCHAR(50) NOT NULL,
     date_and_time DATETIME NOT NULL,
     capacity INT NOT NULL,
     trainer_id INT NOT NULL FOREIGN KEY REFERENCES Trainers(id)
