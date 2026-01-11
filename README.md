@@ -36,3 +36,4 @@ Aby aplikace fungovala, je nutné provést následující kroky:
 3.  **Spuštění:**
     * Upravte si v App.config sekci `<connectionStrings>` upravte hodnoty, které jsou napsaná VELKÝM PÍSMEM na vlastní.
     * Spusťte aplikaci `GymManager.exe`.
+    * Pro funkci 9 a 10 můžete použít `.csv` soubory ze složky `TestingData/`
