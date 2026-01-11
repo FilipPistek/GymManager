@@ -3,8 +3,16 @@ using GymManager.Entities;
 
 namespace GymManager.Repositories
 {
+    /// <summary>
+    /// Repozitář pro správu lekcí.
+    /// Zajišťuje načítání rozvrhu a vkládání nových lekcí.
+    /// </summary>
     public class LessonRepository : BaseRepository
     {
+        /// <summary>
+        /// Načte kompletní rozvrh lekcí.
+        /// Data jsou načtena z pohhledu 'Lesson_Schedule'.
+        /// </summary>
         public List<Lesson> GetSchedule()
         {
             var list = new List<Lesson>();
@@ -37,6 +45,9 @@ namespace GymManager.Repositories
             return list;
         }
 
+        /// <summary>
+        /// Vloží novou lekci do databáze.
+        /// </summary>
         public void Add(Lesson lesson)
         {
             using (var conn = GetConnection())

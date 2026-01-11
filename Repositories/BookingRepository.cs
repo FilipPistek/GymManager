@@ -2,8 +2,18 @@
 
 namespace GymManager.Repositories
 {
+    /// <summary>
+    /// Repozitář pro správu rezervací.
+    /// Obsahuje klíčovou logiku pro transakční zpracování objednávek.
+    /// </summary>
     public class BookingRepository : BaseRepository
     {
+        /// <summary>
+        /// Vytvoří novou rezervaci lekce pro klienta.
+        /// Tato metoda využívá transakci, aby zajistila konzistenci dat.
+        /// Operace: 1. Kontrola kreditu -> 2. Vytvoření rezervace -> 3. Odečtení kreditu -> 4. Zápis do logu.
+        /// Pokud cokoliv selže (chyba DB nebo nedostatek kreditu), všechny změny se vrátí zpět (Rollback).
+        /// </summary>
         public void CreateBooking(int clientId, int lessonId, double price)
         {
             using (var conn = GetConnection())

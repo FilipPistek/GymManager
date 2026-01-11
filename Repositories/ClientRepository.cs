@@ -3,8 +3,15 @@ using GymManager.Entities;
 
 namespace GymManager.Repositories
 {
+    /// <summary>
+    /// Repozitář spravující data klientů (tabulka 'Clients').
+    /// Poskytuje metody pro výpis, přidání, úpravu a mazání záznamů.
+    /// </summary>
     public class ClientRepository : BaseRepository
     {
+        /// <summary>
+        /// Získá seznam všech klientů z databáze.
+        /// </summary>
         public List<Client> GetAll()
         {
             var list = new List<Client>();
@@ -22,7 +29,7 @@ namespace GymManager.Repositories
                             {
                                 Id = (int)reader["id"],
                                 Name = reader["name"].ToString(),
-                                Surname = reader["surname"].ToString(), // Čteme příjmení
+                                Surname = reader["surname"].ToString(),
                                 Email = reader["email"].ToString(),
                                 DateOfBirth = (DateTime)reader["date_of_birth"],
                                 Credit = Convert.ToDouble(reader["credit"]),
@@ -35,6 +42,9 @@ namespace GymManager.Repositories
             return list;
         }
 
+        /// <summary>
+        /// Vloží nového klienta do databáze.
+        /// </summary>
         public void Add(Client client)
         {
             using (var conn = GetConnection())
@@ -56,6 +66,10 @@ namespace GymManager.Repositories
             }
         }
 
+        /// <summary>
+        /// Aktualizuje základní údaje klienta (Jméno, Příjmení, Email) podle Id klienta.
+        /// Ostatní údaje jako Kredit se tímto nemění.
+        /// </summary>
         public void Update(Client client)
         {
             using (var conn = GetConnection())
@@ -76,7 +90,10 @@ namespace GymManager.Repositories
                 }
             }
         }
-        
+
+        /// <summary>
+        /// Smaže klienta z databáze podle jeho ID.
+        /// </summary>
         public void Delete(int id)
         {
             using (var conn = GetConnection())
@@ -91,6 +108,9 @@ namespace GymManager.Repositories
             }
         }
 
+        /// <summary>
+        /// Vyhledá jednoho konkrétního klienta podle ID.
+        /// </summary>
         public Client GetById(int id)
         {
             using (var conn = GetConnection())

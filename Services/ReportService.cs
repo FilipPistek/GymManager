@@ -3,8 +3,15 @@ using GymManager.Repositories;
 
 namespace GymManager.Services
 {
+    /// <summary>
+    /// Služba pro generování statistických reportů.
+    /// Slouží k přehledu vytíženosti trenérů a lekcí.
+    /// </summary>
     public class ReportService : BaseRepository
     {
+        /// <summary>
+        /// Vygeneruje a vypíše do konzole statistiku pro každého trenéra.
+        /// </summary>
         public void GenerateStats()
         {
             Console.WriteLine("\n=== STATISTIKA TRENÉRŮ ===");

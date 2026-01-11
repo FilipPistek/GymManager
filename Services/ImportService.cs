@@ -3,11 +3,18 @@ using GymManager.Repositories;
 
 namespace GymManager.Services
 {
+    /// <summary>
+    /// Služba zajišťující hromadný import dat z externích souborů (CSV).
+    /// </summary>
     public class ImportService
     {
         private readonly LessonRepository lessonRepository = new LessonRepository();
         private readonly TrainerRepository trainerRepository = new TrainerRepository();
 
+        /// <summary>
+        /// Načte lekce z CSV souboru a uloží je do databáze.
+        /// Očekávaný formát řádku: Name,DatumCas,Kapacita,TrenerId
+        /// </summary>
         public void ImportLessons(string filePath)
         {
             if (!File.Exists(filePath))
@@ -44,9 +51,18 @@ namespace GymManager.Services
             }
         }
 
+        /// <summary>
+        /// Importuje trenéry z CSV souboru.
+        /// Řeší převod textové reprezentace specializace na výčtový typ (Enum).
+        /// Formát: Jmeno,Prijmeni,Specializace
+        /// </summary>
         public void ImportTrainers(string filePath)
         {
-            if (!File.Exists(filePath)) { Console.WriteLine("Soubor neexistuje."); return; }
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("Soubor neexistuje.");
+                return;
+            }
 
             try
             {
@@ -58,20 +74,32 @@ namespace GymManager.Services
                     var parts = line.Split(',');
                     if (parts.Length < 3) continue;
 
-                    var trainer = new Trainer
+                    string name = parts[0].Trim();
+                    string surname = parts[1].Trim();
+                    string specString = parts[2].Trim();
+
+                    if (Enum.TryParse(specString, true, out TrainerSpecialization parsedSpecialization))
                     {
-                        Name = parts[0].Trim(),
-                        Surname = parts[1].Trim(),
-                        Specialization = parts[2].Trim()
-                    };
-                    trainerRepository.Add(trainer);
-                    count++;
+                        var trainer = new Trainer
+                        {
+                            Name = name,
+                            Surname = surname,
+                            Specialization = parsedSpecialization
+                        };
+
+                        trainerRepository.Add(trainer);
+                        count++;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Chyba na řádku: '{line}'. Neznámá specializace: {specString}");
+                    }
                 }
                 Console.WriteLine($"Importováno {count} trenérů.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Chyba importu trenérů: " + ex.Message);
+                Console.WriteLine("Kritická chyba importu trenérů: " + ex.Message);
             }
         }
     }

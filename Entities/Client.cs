@@ -1,5 +1,9 @@
 ﻿namespace GymManager.Entities
 {
+
+    /// <summary>
+    /// Třída reprezentující entitu klient.
+    /// </summary>
     public class Client
     {
         public int Id { get; set; }

@@ -1,5 +1,8 @@
 ﻿namespace GymManager.Entities
 {
+    /// <summary>
+    /// Třída reprezentující entitu lekce.
+    /// </summary>
     public class Lesson
     {
         public int Id { get; set; }

@@ -3,8 +3,15 @@ using GymManager.Entities;
 
 namespace GymManager.Repositories
 {
+    /// <summary>
+    /// Repozitář pro správu dat trenérů.
+    /// Dědí od BaseRepository pro sdílení logiky připojení k DB.
+    /// </summary>
     public class TrainerRepository : BaseRepository
     {
+        /// <summary>
+        /// Načte všechny trenéry z databáze.
+        /// </summary>
         public List<Trainer> GetAll()
         {
             var list = new List<Trainer>();
@@ -18,12 +25,15 @@ namespace GymManager.Repositories
                     {
                         while (reader.Read())
                         {
+                            string specString = reader["specialization"].ToString();
+                            TrainerSpecialization parsedSpec = (TrainerSpecialization)Enum.Parse(typeof(TrainerSpecialization), specString);
+
                             list.Add(new Trainer
                             {
                                 Id = (int)reader["id"],
                                 Name = reader["name"].ToString(),
                                 Surname = reader["surname"].ToString(),
-                                Specialization = reader["specialization"].ToString()
+                                Specialization = parsedSpec
                             });
                         }
                     }
@@ -32,6 +42,9 @@ namespace GymManager.Repositories
             return list;
         }
 
+        /// <summary>
+        /// Vloží nového trenéra do databáze.
+        /// </summary>
         public void Add(Trainer trainer)
         {
             using (var conn = GetConnection())
@@ -42,7 +55,8 @@ namespace GymManager.Repositories
                 {
                     cmd.Parameters.AddWithValue("@name", trainer.Name);
                     cmd.Parameters.AddWithValue("@surname", trainer.Surname);
-                    cmd.Parameters.AddWithValue("@specialization", trainer.Specialization);
+                    cmd.Parameters.AddWithValue("@specialization", trainer.Specialization.ToString());
+
                     cmd.ExecuteNonQuery();
                 }
             }
