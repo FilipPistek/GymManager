@@ -34,5 +34,5 @@ Aby aplikace fungovala, je nutné provést následující kroky:
     * Vytvoří se tabulky `Clients`, `Trainers`, `Lessons`, `Bookings`, `Logs` a `Views`.
 
 3.  **Spuštění:**
-    * Upravte si v App.config a sekci `<connectionStrings>` upravte hodnoty, které jsou napsaná VELKÝM PÍSMEM na vlastní.
+    * Upravte si v App.config sekci `<connectionStrings>` upravte hodnoty, které jsou napsaná VELKÝM PÍSMEM na vlastní.
     * Spusťte aplikaci `GymManager.exe`.
